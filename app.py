@@ -19,8 +19,8 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    client_id="67521804560-k61l2jm3u13i6orjt1ucfh80qed4oonu.apps.googleusercontent.com",
-    client_secret="aYLMVROLsyai16MW5xYhhVbk",
+    client_id="x",
+    client_secret="x",
     access_token_url='https://accounts.google.com/o/oauth2/token',
     access_token_params=None,
     authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -36,9 +36,9 @@ import pymysql
 
 mysql = MySQL()
 app.secret_key = 'secretkey'
-app.config['MYSQL_DATABASE_USER'] = 'rAsCELs8Of'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'kag5uKYDb3'
-app.config['MYSQL_DATABASE_DB'] = 'rAsCELs8Of'
+app.config['MYSQL_DATABASE_USER'] = 'x'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'x'
+app.config['MYSQL_DATABASE_DB'] = 'x'
 app.config['MYSQL_DATABASE_HOST'] = 'remotemysql.com'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 
