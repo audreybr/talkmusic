@@ -1,0 +1,132 @@
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>TalkMusic</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/organize.css"
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-anchor,.fa-coffee {font-size:200px}
+    </style>
+    <body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+    <div class="w3-bar w3-teal w3-card w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-khaki" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
+        <a href="/mystatus" class="w3-bar-item w3-button w3-padding-large w3-white">My Status</a>
+        <a href="/logout" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
+        <a href="/mystatus" class="w3-bar-item w3-button w3-padding-large w3-white">My Status</a>
+        <a href="/logout" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
+    </div>
+    </div>
+    
+    <div id="statlist">
+    <header class="w3-container w3-blue-grey w3-center" style="padding:100px 20px">
+        <p>Add Status</p>
+        <input type="text" style = "color:black" placeholder="STATUS" id="statusdetails">
+        <button style="color: black;" onclick="Add()"><a href="{{ url_for('organize')}}">Add</a></button>
+        <br>
+        <br>
+        <p>Edit Status</p>
+        <input type="text" style = "color:black" placeholder="id" id="id">
+        <input type="text" style = "color:black" placeholder="STATUS" id="statusedited">
+        <button style="color: black;" onclick="Update()"><a href="{{ url_for('organize')}}">Update</a></button>
+        <br>
+        <br>
+        <p>Delete Status</p>
+        <input type="text" style = "color:black" placeholder="id" id="iddel">
+        <button style="color: black;" onclick="Delete()"><a href="{{ url_for('organize')}}">Delete</a></button>
+        <br>
+        <br>
+        <div style="color: black;" class="container">
+            <h2 style="color:cornsilk;">Your Status</h2>
+            <table class="table">
+                <thead>
+                    <tr bgcolor = "#FFEBCD">
+                        <th>ID Status</th>
+                        <th>Your Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td bgcolor = "#FFFFFF">{{row[0]}}</td>
+                        <td bgcolor = "#FFFFFF">{{row[1]}}</td>
+                    </tr>
+                {% endfor %}    
+                </tbody>
+            </table>
+        </div>
+    
+    </header>
+    </div>
+</body>
+<script>
+    function Add(){
+        $("#statlist").load("#statlist")
+        $.ajax({
+            url: '/mystatus',
+            type: 'post',
+            data:{
+                'statusdetails': $('#statusdetails').val(),
+            },
+            success: function (response) {
+                console.log(response)
+                $("#statlist").load("#statlist");
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+    function Update(){
+        $("#statlist").load("#statlist")
+        $.ajax({
+            url: '/mystatus',
+            type: 'put',
+            data:{
+                'id': $('#id').val(),
+                'statusedited': $('#statusedited').val(),
+            },
+            success: function (response) {
+                console.log(response)
+                $("#statlist").load("#statlist");
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+    function Delete(){
+        $("#statlist").load("#statlist")
+        $.ajax({
+            url: '/mystatus',
+            type: 'delete',
+            data:{
+                'id': $('#iddel').val()
+            },
+            success: function (response) {
+                console.log(response)
+                $("#statlist").load("#statlist")
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+</script>
+</html>

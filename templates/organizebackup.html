@@ -1,0 +1,85 @@
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <body>
+        <p>Tambah Tugas</p>
+        <input type="text" placeholder="STATUS" id="statusdetails">
+        <button onclick="Add()">Add</button>
+        <p>Update Tugas</p>
+        <input type="text" placeholder="id" id="id">
+        <input type="text" placeholder="STATUS" id="statusedited">
+        <button onclick="Update()">UPDATE</button>
+        <p>Hapus Tugas</p>
+        <input type="text" placeholder="id" id="idhapus">
+        <button onclick="HAPUS()">HAPUS</button>
+        <p><a class="button" href="/mystatus">Lihat Data Tugas</a></p>
+        <div class="container">
+            <h2>test</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr bgcolor = "#FFEBCD">
+                        <th>statusid</th>
+                        <th>statusdetails</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                    </tr>
+                {% endfor %}    
+                </tbody>
+            </table>
+            </div>
+    
+    </body>
+<script>
+    function Add(){
+        $.ajax({
+            url: '/mystatus',
+            method: 'post',
+            data:{
+                'statusdetails': $('#statusdetails').val(),
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+    function Update(){
+        $.ajax({
+            url: '/mystatus',
+            type: 'put',
+            data:{
+                'id': $('#id').val(),
+                'statusedited': $('#statusedited').val(),
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+    function HAPUS(){
+        $.ajax({
+            url: '/delete',
+            method: 'delete',
+            data:{
+                'id': $('#idhapus').val()
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+</script>
+</html>
